@@ -1,7 +1,4 @@
-from flask import Flask
-from flask import render_template
-from jinja2 import Template
-
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
@@ -14,6 +11,18 @@ def render_list():
 
 @app.route('/story')
 def render_form():
+    return render_template('form.html')
+
+
+@app.route('/story', methods=['POST'])
+def save_post_data():
+
+    form = request.form
+    form_data_list = ["{}: {}".format(key, form[key]) for key in form]
+
+    with open('stories.csv', 'w+') as file:
+        file.write(','.join(form_data_list))
+
     return render_template('form.html')
 
 
