@@ -18,7 +18,7 @@ def render_form():
 def save_post_data():
 
     form = request.form
-    form_data_list = ["{}: {}".format(key, form[key]) for key in form]
+    form_data_list = ["{}:{}".format(key, form[key]) for key in form]
 
     with open('stories.csv', 'w+') as file:
         file.write(','.join(form_data_list))
