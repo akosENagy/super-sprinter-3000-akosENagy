@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request
+import data_manager
 
 app = Flask(__name__)
 
@@ -6,7 +7,9 @@ app = Flask(__name__)
 @app.route('/')
 @app.route('/list')
 def render_list():
-    return render_template('list.html')
+    user_stories = data_manager.get_data_from_file('stories.csv')
+
+    return render_template('list.html', user_stories=user_stories)
 
 
 @app.route('/story')
@@ -17,11 +20,8 @@ def render_form():
 @app.route('/story', methods=['POST'])
 def save_post_data():
 
-    form = request.form
-    form_data_list = ["{}:{}".format(key, form[key]) for key in form]
-
-    with open('stories.csv', 'w+') as file:
-        file.write(','.join(form_data_list))
+    form_data_list = ["{}:{}".format(key, request.form[key]) for key in request.form]
+    data_manager.write_to_file(form_data_list)
 
     return render_template('form.html')
 
