@@ -6,7 +6,34 @@
 </head>
 
 <body>
-    <h1>List page</h1>
+    <h1>User Story Manager</h1>
+
+    <a href="/story"> <input type="button" value="Add new User Story"> </a>
+
+    <table border="1">
+
+        <tr>
+            <td width="3%"> ID </td>
+            <td width="11%"> Story Title </td>
+            <td width="22%"> User Story </td>
+            <td width="40%"> Acceptance Criteria </td>
+            <td width="8%"> Business Value </td>
+            <td width="8%"> Estimation </td>
+            <td width="8%"> Status </td>
+        </tr>
+
+        {% for user_story in user_stories %}
+        <tr>
+            <td width="3%"> {{ user_story['id'] }} </td>
+            <td width="11%"> {{ user_story['story_title'] }} </td>
+            <td width="22%"> {{ user_story['user_story'] }} </td>
+            <td width="40%"> {{ user_story['acceptance_criteria'] }} </td>
+            <td width="8%"> {{ user_story['business_value'] }} </td>
+            <td width="8%"> {{ user_story['estimation'] }}h </td>
+            <td width="8%"> {{ user_story['status'] }} </td>
+        </tr>
+        {% endfor %}
+    </table>
 </body>
 
 </html>
