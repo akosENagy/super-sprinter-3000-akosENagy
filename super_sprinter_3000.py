@@ -4,8 +4,8 @@ import data_manager
 app = Flask(__name__, static_url_path="/static")
 
 
-@app.route('/')
 @app.route('/list')
+@app.route('/')
 def render_list():
     user_stories = data_manager.get_data_from_file('stories.csv')
 
@@ -26,12 +26,19 @@ def save_post_data():
     return render_template('form.html', title="Add New Story", user_story={})
 
 
-@app.route('/story/<story_id>')
+@app.route('/story/<story_id>', methods=['GET', 'POST'])
 def render_filled_form(story_id):
 
     user_stories = data_manager.get_data_from_file('stories.csv')
 
-    return render_template('form.html', title="Edit Story", user_story=user_stories[int(story_id) - 1])
+    if request.method == 'GET':
+        return render_template('form.html', title="Edit Story", user_story=user_stories[int(story_id) - 1])
+
+    if request.method == 'POST':
+        user_stories[int(story_id) - 1] = request.form
+        data_manager.write_to_file(user_stories)
+
+        return redirect(url_for('render_list'))
 
 
 @app.route('/delete/<story_id>')

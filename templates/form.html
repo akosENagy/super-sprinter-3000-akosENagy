@@ -9,7 +9,7 @@
 
     <h1>User Story manager - {{ title }} </h1>
 
-    <form action="/story" method="POST">
+    <form action="{{ '/story' if not user_story else '/story/' + user_story['id'] }}" method="POST">
         <label for="story_title"> Story Title </label> <br>
         <input name="story_title" id="story_title" type="text"
             {% if user_story %} value="{{user_story['story_title']}}" {% endif %} required>
