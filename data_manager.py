@@ -18,7 +18,7 @@ def get_data_from_file(path):
             data_dict = {}
             for pair in form_data:
                 data_dict[pair.split(':')[0]] = pair.split(':')[1].strip()
-            data_dict['id'] = i
+            data_dict['id'] = i + 1
             data_final.append(data_dict)
 
         return data_final
