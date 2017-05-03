@@ -11,27 +11,32 @@
     <a href="/story"> <input type="button" value="Add new User Story"> </a>
 
     <table border="1">
-
-        <tr>
-            <td width="3%"> ID </td>
-            <td width="11%"> Story Title </td>
-            <td width="22%"> User Story </td>
-            <td width="40%"> Acceptance Criteria </td>
-            <td width="8%"> Business Value </td>
-            <td width="8%"> Estimation </td>
-            <td width="8%"> Status </td>
-        </tr>
-
-        {% for user_story in user_stories %}
-        <tr>
-            <td width="3%"> {{ user_story['id'] }} </td>
-            <td width="11%"> {{ user_story['story_title'] }} </td>
-            <td width="22%"> {{ user_story['user_story'] }} </td>
-            <td width="40%"> {{ user_story['acceptance_criteria'] }} </td>
-            <td width="8%"> {{ user_story['business_value'] }} </td>
-            <td width="8%"> {{ user_story['estimation'] }}h </td>
-            <td width="8%"> {{ user_story['status'] }} </td>
-        </tr>
+        <thead>
+            <th width="3%"> ID </th>
+            <th width="11%"> Story Title </th>
+            <th width="22%"> User Story </th>
+            <th width="40%"> Acceptance Criteria </th>
+            <th width="8%"> Business Value </th>
+            <th width="8%"> Estimation </th>
+            <th width="8%"> Status </th>
+            <th> Edit/Delete </th>
+        </thead>
+        <tbody>
+            {% for user_story in user_stories %}
+            <tr>
+                <td width="3%"> {{ user_story['id'] }} </td>
+                <td width="11%"> {{ user_story['story_title'] }} </td>
+                <td width="22%"> {{ user_story['user_story'] }} </td>
+                <td width="40%"> {{ user_story['acceptance_criteria'] }} </td>
+                <td width="8%"> {{ user_story['business_value'] }} </td>
+                <td width="8%"> {{ user_story['estimation'] }}h </td>
+                <td width="8%"> {{ user_story['status'] }} </td>
+                <td>
+                    <a href="story/{{ user_story['id'] }}"> <img src="static/pencil.png" style="margin:5px;width:25px;height:25px"> </a>
+                    <a href=""> <img src="static/bin.png" style="margin:5px;width:25px;height:25px"> </a>
+                </td>
+            </tr>
+        </tbody>
         {% endfor %}
     </table>
 </body>
